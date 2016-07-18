@@ -37,7 +37,22 @@ namespace WebUI.Controllers
                 CurrentCategory = category
             }; 
               return View(model);
-            }            
+            }
+
+         public FileContentResult GetImage(int cinemaId)
+         {
+             Cinema cinema = repository.Cinemas
+                 .FirstOrDefault(g => g.CinemaId == cinemaId);
+
+             if (cinema != null)
+             {
+                 return File(cinema.ImageData, cinema.ImageMimeType);
+             }
+             else
+             {
+                 return null;
+             }
+         }
 	}
 }
 
