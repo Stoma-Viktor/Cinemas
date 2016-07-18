@@ -3,27 +3,54 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
     <style>
+        .navbar-right {
+            float:right !important;
+            margin-right: 15px;
+            margin-left: 15px;
+
+        }
+         .navbar-btn {
+            width: 200px;
+            height: 75px;
+            font-size: 35px;
+        }
+        .h2
+        {
+            color:blue;
+        }
+
+    </style>
+
+
+    <style>
         body {
-            min-height:1000%;
-            background:  url(images/2.jpg) no-repeat;
-            background-size: 100% 100%;             
+            min-height: 1000px;
+            background-size: cover;
+            background-color: #7E7F7E;
         }
     </style>
+    
 </head>
- <body>
+ <body>     
     <div class="navbar navbar-inverse" role="navigation">
          <h1>CinemaStore</h1>
+        
+        @Html.Action("Summary", "Cart")
     </div>
-    <div id="Category" class="col-xs-3">
+     <div id="Category" class="col-xs-3" >
          @Html.Action("Menu", "Nav")
-    </div>
+     </div>
     <div class="col-xs-8">
         @RenderBody()
-    </div>
-
+    </div>  
+     <div style="float:right">
+         <a href="http://localhost:17508/Admin/Index" class="btn btn-success" style="font-size: 1.8em">Администратор</a>
+</div>       
+     
 </body>
 </html>
 

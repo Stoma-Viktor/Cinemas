@@ -3,27 +3,55 @@
 <div class="well">
     <div class="row">
         <div class="col-xs-10">
-            <h3>
-                <strong>@Model.CinemaName</strong>
-            </h3>
-            <h4>
-                <strong>@Model.Year</strong>
-                <strong>@Model.Country</strong>
-                <strong>@Model.Directors</strong>
-                <strong>@Model.Category</strong>
-                <strong>@Model.time</strong>
-                <strong>@Model.Artors</strong>
+           @if (Model.Image != null)
+{
+    <img src=@Model.Image width="300" height="450" align="left" hspace="40">
+}
 
+            <h4>
+                <strong><span style="font-size:1em; color: orange">Название:</span>  @Model.CinemaName</strong>
             </h4>
+            
+            <h4>
+                <strong><span style="font-size:1em; color: orange">Год выпуска:</span>  @Model.Year</strong>
+            </h4>
+                <h4>
+                    <strong><span style="font-size:1em; color: orange">Страна:</span>  @Model.Country</strong>
+                </h4>
+                    <h4>
+                        <strong><span style="font-size:1em; color: orange">Режиссёры:</span>  @Model.Directors</strong>
+                    </h4>
+                        <h4>
+                            <strong><span style="font-size:1em; color: orange">Жанр:</span>  @Model.Category</strong>
+                        </h4>
+                            <h4>
+                                <strong><span style="font-size:1em; color: orange">Длительность:</span>  @Model.time мин</strong>
+                            </h4>
+                                <h4>
+                                    <strong><span style="font-size:1em; color: orange">Актёры:</span> @Model.Artors</strong>
+
+                                </h4>
+                                <h4>
+                                    <strong><span style="font-size:1em; color: orange">Описание:</span> @Model.Description</strong>
+
+                                </h4>
         </div>
 
         <div class="col-xs-2">
             <h3>
-                <strong class="pull-right label label-primary"> @Model.Price.ToString("# руб")</strong>
+                <strong id="price" class="pull-right label label-primary"> @Model.Price.ToString("# руб")</strong>
             </h3>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+{
+    <div class="pull-right">
+        @Html.HiddenFor(x => x.CinemaId)
+        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input type="submit" class="btn btn-danger" value="Добавить в корзину" />
+    </div>
+}
         </div>
     </div>
-    <span class="lead">
-        @Model.Description
-    </span>
+    
+       
+    
 </div>

@@ -1,0 +1,49 @@
+﻿@model Domain.Entities.Cinema
+
+@{
+    ViewBag.Title = "Админ панель: редактирование товара";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel" style="color:gray">
+    <div class=" panel-heading"><h2 style="color: orange">Редактирование фильма «@Model.CinemaName»</h2></div>
+        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="panel-body" style="font-size: 1.5em">
+                @Html.HiddenFor(m => m.CinemaId)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+                {
+                    switch (property.PropertyName)
+                    {
+                        case "CinemaId":
+                        case "ImageData":
+                        case "ImageMimeType":
+                            // Ничего не делать
+                            break;
+                        default:
+                            <div class="form-group" style="font-size: 1.5em">
+                                <label style="color: orange;">@(property.DisplayName ?? property.PropertyName)</label>
+                                @if (property.PropertyName == "Description")
+                                {
+                                    @Html.TextArea(property.PropertyName, null,
+                                         new { @class = "form-control", rows = 5, @style = "font-size: 1em" })
+                                }
+                                else
+                                {
+                                    @Html.TextBox(property.PropertyName, null,
+                                             new { @class = "form-control", @style = "height:5%;width:25%;font-size: 1em" })
+                                }
+
+                                @Html.ValidationMessage(property.PropertyName)
+                            </div>
+                                break;
+                    }
+                }
+                
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn btn-success" style="height:90%;width:12%; font-size:1.5em" />
+                @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", null, new { @class = "btn btn-primary", @style = "height:90%;width:700px;font-size: 1.8em" })
+            </div>
+        }
+</div>
